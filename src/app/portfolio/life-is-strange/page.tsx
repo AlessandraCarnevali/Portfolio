@@ -25,7 +25,7 @@ export default function LifeIsStrangeGraphics() {
 
       {/* ------------------------- TITOLO ------------------------- */}
       <h1 className="lis-graphic-title lis-graphic-fade lis-delay-1">
-        Life Is Strange — Lato Grafico
+        Life Is Strange — Progetto
       </h1>
 
       {/* ------------------------- STORIA ------------------------- */}

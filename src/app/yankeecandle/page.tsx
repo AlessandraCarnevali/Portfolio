@@ -109,8 +109,8 @@ export default function YankeeCandlePage() {
           <p>{slidesHTML[indexHTML].text}</p>
 
           <div className="slider-buttons">
-            <button onClick={prevHTML}>◀ Previous</button>
-            <button onClick={nextHTML}>Next ▶</button>
+            <button onClick={prevHTML}>Previous</button>
+            <button onClick={nextHTML}>Next</button>
           </div>
         </div>
       </div>
@@ -146,8 +146,8 @@ export default function YankeeCandlePage() {
           <p>{slidesCSS[indexCSS].text}</p>
 
           <div className="slider-buttons">
-            <button onClick={prevCSS}>◀ Previous</button>
-            <button onClick={nextCSS}>Next ▶</button>
+            <button onClick={prevCSS}> Previous</button>
+            <button onClick={nextCSS}>Next</button>
           </div>
         </div>
       </div>

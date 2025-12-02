@@ -3624,6 +3624,20 @@ body {
     font-size: 14px;
   }
 
+  .lis-buttons button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap !important;   /* ❗ non va più a capo */
+  line-height: 1 !important;        /* ❗ altezza testo corretta */
+  vertical-align: middle;
+  
+  padding: 12px 22px;
+  min-width: 110px;                 /* ❗ evita spezzamento testo */
+}
+
+
   .lis-divider {
     width: 90%;
     margin: 50px auto;
@@ -3708,6 +3722,15 @@ body {
 .lis-slider-image {
   min-height: 260px;   /* la tua misura esatta */
 }
+
+@media (max-width: 480px) {
+  .lis-go-to-graphics {
+    margin-top: 15px !important;     /* era 60 → poi 30 → ora 15 */
+    margin-bottom: 20px !important;  /* leggero, non troppo */
+  }
+}
+
+
 
 /* ===================================== */
 /* RESPONSIVE — LIFE IS STRANGE GRAFICA  */
