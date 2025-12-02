@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,3 +26,3767 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ========================================================= */
+/* === HERO SECTION (HOME PAGE) ============================ */
+/* ========================================================= */
+
+.hero-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Hover interactions */
+.hero-container:hover .hero-section {
+  flex: 0.5;
+}
+
+.hero-section:hover {
+  flex: 1.5;
+  transform: scale(1.02);
+  z-index: 2;
+}
+
+/* Sezioni base */
+.hero-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: flex 0.6s ease, transform 0.4s ease;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+/* Immagini */
+.hero-section.left {
+  background-image: url('/robot.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-section.right {
+  background-image: url('/fumetto.jpg');
+  background-size: cover;
+ 	background-position: center;
+}
+
+/* Overlay */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  transition: 0.4s ease;
+  z-index: 1;
+}
+
+.hero-section:hover::before {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ANIMAZIONE INIZIALE */
+.hero-container.animate .hero-section.left {
+  animation: homeSlideLeft 3s ease forwards;
+}
+
+.hero-container.animate .hero-section.right {
+  animation: homeSlideRight 3s ease forwards;
+}
+
+/* ========================================================= */
+/* ========================= NAVBAR ========================= */
+/* ========================================================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #000;
+  display: flex;
+ 	align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.navbar.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  border-radius: 50%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.logo-img:hover {
+  filter: brightness(0.7);
+}
+
+/* MENU CENTRALE */
+.navbar-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: 0.3s ease;
+}
+
+.navbar-links li a:hover {
+  color: #00e1ff;
+}
+
+/* LINK ATTIVO */
+.navbar-links .active {
+  color: #00e1ff;
+  font-weight: 600;
+  position: relative;
+}
+
+.navbar-links .active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00e1ff;
+  border-radius: 4px;
+}
+
+/* SOCIAL */
+.navbar-social {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-social a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.navbar-social a:hover {
+  color: #00e1ff;
+}
+
+/* ============ DROPDOWN PORTFOLIO ============ */
+
+.navbar-links .dropdown {
+  position: relative;
+ 	cursor: pointer;
+}
+
+.navbar-links .dropdown span {
+  color: white;
+ 	font-size: 15px;
+  letter-spacing: 1px;
+  transition: 0.3s ease;
+}
+
+.navbar-links .dropdown span:hover {
+  color: #00e1ff;
+}
+
+/* MENU */
+.dropdown-menu {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: #000;
+  padding: 10px 0;
+  list-style: none;
+  min-width: 180px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+.dropdown-menu li a:hover {
+  background: #222;
+  color: #00e1ff;
+}
+
+/* =================================================== */
+/* FIX DROPDOWN — NON SI CHIUDE QUANDO SCENDI COL MOUSE */
+/* =================================================== */
+
+/* Il dropdown resta aperto quando passi dal testo al menu */
+.navbar-links .dropdown:hover .dropdown-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Aggiunge un'area invisibile tra il tasto e il menu per evitare chiusure */
+.navbar-links .dropdown {
+  padding-bottom: 20px; /* aumenta leggermente l'area hover */
+}
+
+.dropdown-menu {
+  margin-top: -10px; /* avvicina il menu al bottone */
+}
+
+
+/* ========================================================= */
+/* ======================== ABOUT PAGE ====================== */
+/* ========================================================= */
+
+.about-container {
+  margin-top: 120px;
+ 	display: flex;
+ 	align-items: center;
+  justify-content: space-between;
+  padding: 60px 120px;
+  gap: 80px;
+}
+
+.about-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #5c5959ff;
+  opacity: 0.45;
+  margin: 0;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.50);
+}
+
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  margin: 80px 0;
+  border-radius: 2px;
+}
+
+/* ABOUT TEXT */
+.about-text {
+  flex: 1;
+}
+
+.about-text h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.about-text .dot {
+  color: #00e1ff;
+}
+
+.about-text p {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* ABOUT FOTO */
+.about-photo {
+  flex: 1;
+ 	display: flex;
+ 	justify-content: center;
+}
+
+.about-photo .photo {
+  width: 100%;
+ 	height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================================= */
+/* ======================== PIE CHART ======================= */
+/* ========================================================= */
+
+.skills-chart-container {
+  width: 100%;
+ 	margin-top: 2px;
+  margin-bottom: 80px;
+ 	display: flex;
+ 	align-items: center;
+  justify-content: space-around;
+  padding: 40px 0;
+  background: #f7f7f7;
+  border-radius: 6px;
+}
+
+.skills-column {
+  width: 25%;
+}
+
+.skills-column h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.skills-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.skills-column li {
+  margin-bottom: 10px;
+  color: #444;
+  font-size: 16px;
+}
+
+/* PIE */
+.pie-chart {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+ 	align-items: center;
+  overflow: hidden;
+}
+
+.pie-chart .designer {
+  position: absolute;
+  width: 70%;
+  height: 100%;
+ 	left: 0;
+  background: linear-gradient(#dcdcdc, #bfbfbf);
+  border-radius: 260px 0 0 260px;
+ 	display: flex;
+  justify-content: center;
+ 	align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+ 	color: #fff;
+}
+
+.pie-chart .coder {
+  position: absolute;
+  width: 40%;
+  height: 100%;
+ 	right: 0;
+  background: #333;
+  border-radius: 0 260px 260px 0;
+ 	display: flex;
+  justify-content: center;
+ 	align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+ 	color: #fff;
+}
+
+/* ========================================================= */
+/* ===================== RANDOM FACTS ======================= */
+/* ========================================================= */
+
+.random-container {
+  width: 100%;
+ 	display: flex;
+ 	align-items: center;
+  justify-content: space-between;
+  padding: 80px 120px;
+  gap: 80px;
+}
+
+.random-image img {
+  width: 650px;
+  max-width: 100%;
+  object-fit: contain;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.random-text h2 {
+  font-size: 2.5rem;
+ 	margin-bottom: 25px;
+  color: #222;
+}
+
+.random-text li {
+ 	font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* ========================================================= */
+/* ===================== ANIMAZIONI ABOUT =================== */
+/* ========================================================= */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s ease forwards;
+}
+
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(60px);
+  animation: slideInRight 1s ease forwards;
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  animation: slideInLeft 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ========================================================= */
+/* ========== KEYFRAMES HOME ================================ */
+/* ========================================================= */
+
+@keyframes homeSlideLeft {
+  0% {
+    transform: translateX(-40%) scale(1.2);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes homeSlideRight {
+  0% {
+    transform: translateX(40%) scale(1.2);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* ========================================================= */
+/* ===================== MY STORY =========================== */
+/* ========================================================= */
+
+.story-container {
+  width: 100%;
+ 	display: flex;
+ 	align-items: center;
+  justify-content: space-between;
+  padding: 80px 120px;
+  gap: 80px;
+}
+
+.story-image img {
+  width: 650px;
+  max-width: 100%;
+  border-radius: 0;
+  object-fit: cover;
+  box-shadow: none;
+}
+
+.story-text {
+  flex: 1;
+}
+
+.story-text h2 {
+  font-size: 2.5rem;
+ 	margin-bottom: 25px;
+  color: #222;
+}
+
+.story-text p {
+  font-size: 1.2rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+@media (max-width: 980px) {
+  .story-container {
+    flex-direction: column;
+    padding: 40px 30px;
+   	text-align: center;
+  }
+
+  .story-image img {
+    width: 100%;
+  }
+}
+
+.random-text h2,
+.story-text h2 {
+  text-align: center;
+  width: 100%;
+}
+
+/* ========================================================= */
+/* ============= BACK TO TOP BUTTON ========================= */
+/* ========================================================= */
+
+.back-to-top {
+  width: 70px;
+  height: 70px;
+  margin: 80px auto 40px auto;
+  background: #ffffff;
+  border-radius: 50%;
+  display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+  font-size: 32px;
+  cursor: pointer;
+ 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #333;
+}
+
+.back-to-top:hover {
+  transform: translateY(-4px);
+ 	box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.back-to-top span {
+  position: relative;
+  top: -2px;
+  font-weight: 600;
+}
+
+/* ========================================================= */
+/* ===================== CODICEBACK PAGE ==================== */
+/* ========================================================= */
+
+.codeback-container {
+  margin-top: 150px;
+  text-align: center;
+  padding: 40px;
+}
+
+.codeback-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -1px;
+}
+
+.codeback-book {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-flip {
+  margin: 0 auto;
+}
+
+
+/* ======= PAGINE DEL LIBRO (VERSIONE ORIGINALE + COVER) ======= */
+
+.book-page {
+  background: #ffffff;
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-family: Arial, sans-serif;
+  border: 1px solid #e5e5e5;
+  box-shadow: inset 0 0 25px rgba(0,0,0,0.15);
+}
+
+.book-page h1,
+.book-page h2 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #333;
+  font-size: 26px
+}
+
+.book-page p {
+  font-size: 14px;
+  color: #555;
+}
+
+.book-page a {
+  font-size: 14px;
+  color: #0066ff;
+  text-decoration: none;
+  margin-top: 10px;
+}
+
+.book-page a:hover {
+  color: #0044aa;
+}
+
+/* COVER */
+.cover {
+  background-image: url('/cover.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover h1 {
+  color: white;
+}
+
+
+/* wrapper interno alle pagine */
+.page-content {
+  margin-top: auto;   /* ⬇ SPINGE IN BASSO */
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.pagina-indice {
+  font-size: 14px;
+  font-weight: 600;
+  color: #999;
+  margin-bottom: 170px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.codeback-title {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+
+/* ===== ANIMAZIONE ENTRATA PAGINA (FADE-IN) ===== */
+.fade-page {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadePage 1s ease forwards;
+}
+
+@keyframes fadePage {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================= */
+/* YANKEE CANDLE — PAGE STYLE    */
+/* ============================= */
+
+.yankee-container {
+  margin-top: 70px;
+  padding: 40px;
+  text-align: center;
+
+  /* sfondo consigliato */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* overlay per leggere bene il testo */
+  position: relative;
+}
+
+.yankee-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(238, 178, 178, 0.55);  /* scurisce lo sfondo */
+  backdrop-filter: blur(2px);    /* effetto elegante */
+  z-index: 0;
+}
+/* SFONDO COMPLETAMENTE ROSA PER TUTTA LA PAGINA */
+.yankee-page {
+  background-color: #f3c9c9; /* colore rosa */
+  min-height: 100vh;        /* occupa tutta la pagina */
+  width: 100%;
+  padding-top: 120px;       /* spazio sotto la navbar */
+  text-align: center;
+}
+
+/* TITOLI */
+.yankee-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.yankee-section {
+  margin-top: 25px;
+  font-size: 3rem;
+  font-weight: 600;
+  color: rgb(14, 13, 13);
+  text-align: center;
+  opacity: 0.9;
+}
+
+
+
+/* ============================= */
+/*   YANKEE CANDLE — SLIDER      */
+/* ============================= */
+
+.yankee-page {
+  background: #f3d0d0;
+  min-height: 100vh;
+  padding: 100px 0;
+}
+
+/* contiene immagine + testo affiancati */
+.slider-container {
+  max-width: 1200px;
+  margin: 50px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 40px;
+  width: 100%;
+}
+
+/* FOTO DI DEFAULT (non usata dallo slider animato) */
+/* .slider-image img {
+  width: 500px;
+  height: auto;
+  border-radius: 18px;
+  object-fit: cover;
+} */
+
+
+/* ========================== */
+/*  ✔ MODIFICA DEFINITIVA     */
+/*  Slider-image UNICO        */
+/* ========================== */
+.slider-image {
+  position: relative;
+  width: 480px;
+  height: 260px;      /* ✔ ALTEZZA FISSA IDENTICA HTML/CSS */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* ✔ CENTRATA SEMPRE */
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* ✔ tutte le immagini animate hanno stessa misura */
+.slider-image img,
+.slide-img-html,
+.slide-img-css {
+  max-width: 420px;
+  max-height: 260px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+/* ========================== */
+/* SLIDER — IMMAGINI OVERLAY  */
+/* ========================== */
+
+.slide-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 30px 30px rgba(0,0,0,0.50);
+  opacity: 0;
+  transform: translateX(40px) rotateY(10deg);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.slide-img.active {
+  opacity: 1;
+  transform: translateX(0) rotateY(0);
+}
+
+.slide-img.exit {
+  opacity: 0;
+  transform: translateX(-40px) rotateY(-10deg);
+}
+
+/* Immagine cliccabile */
+.clickable-img {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.clickable-img:hover {
+  transform: scale(1.03);
+}
+
+/* ========================== */
+/* MODALE                     */
+/* ========================== */
+
+.img-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.70);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;   /* 👈 PORTA L’IMMAGINE PIÙ SU */
+  padding-top: 120px;        /* 👈 QUANTO SU? modifica questo valore */
+  z-index: 99999;
+}
+
+
+.img-modal-content {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+  border-radius: 10px;
+  animation: zoomIn 0.25s ease;
+  z-index: 100000;
+}
+
+.close-modal {
+  position: fixed;
+  top: 90px;
+  right: 40px;
+  font-size: 2.4rem;
+  color: white;
+  cursor: pointer;
+  z-index: 100001;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ======================= */
+/* TRANSIZIONI SLIDE       */
+/* ======================= */
+
+.slide-transition-in {
+  opacity: 1 !important;
+  transform: translateX(0) rotateY(0) !important;
+}
+
+.slide-transition-out {
+  opacity: 0 !important;
+  transform: translateX(-40px) rotateY(-10deg) !important;
+}
+
+.section-divider-yankee {
+  width: 80%;
+  height: 1px;
+  margin: 60px auto;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
+
+
+/* ============================= */
+/* SLIDE HTML                    */
+/* ============================= */
+
+.slide-img-html {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  opacity: 0;
+  transform: translateX(40px) rotateY(10deg);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 5;
+}
+
+.slide-img-html.slide-transition-in {
+  opacity: 1 !important;
+  transform: translateX(0) rotateY(0) !important;
+  z-index: 6;
+}
+
+.slide-img-html.slide-transition-out {
+  opacity: 0 !important;
+  transform: translateX(-40px) rotateY(-10deg) !important;
+  z-index: 4;
+}
+
+/* ============================= */
+/* SLIDE CSS                     */
+/* ============================= */
+
+.slide-img-css {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  opacity: 0;
+  transform: translateX(40px) rotateY(10deg);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1;
+}
+
+.slide-img-css.slide-transition-in {
+  opacity: 1 !important;
+  transform: translateX(0) rotateY(0) !important;
+  z-index: 2;
+}
+
+.slide-img-css.slide-transition-out {
+  opacity: 0 !important;
+  transform: translateX(-40px) rotateY(-10deg) !important;
+  z-index: 0;
+}
+
+/* ========================= */
+/* ENTRATA PAGINA COMPLETA   */
+/* ========================= */
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: pageIn 0.8s ease forwards;
+}
+
+@keyframes pageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FORZA i bottoni ad essere sempre sotto il testo e SEMPRE visibili */
+.slider-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 🔥 BOTTONI ORIGINALI VIOLA */
+.slider-buttons button {
+  background: #6c2bd9;       /* viola */
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.slider-buttons button:hover {
+  background: #5a22b8;       /* viola più scuro */
+  transform: scale(1.03);
+}
+
+/* ========================= */
+/*  RIPRISTINO TESTI SLIDER  */
+/* ========================= */
+
+.slider-text h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111;           /* nero pieno */
+  margin-bottom: 15px;
+  justify-content: center;   /* CENTRA VERTICALMENTE */
+  align-items: flex-start;   /* ALLINEA A SINISTRA COME PRIMA */     /* come prima */
+}
+
+.slider-text p {
+  font-size: 1.3rem;     /* più grande */
+  line-height: 1.7;      /* più arioso */
+  color: #333;           /* nero morbido */
+  text-align: left;      /* come prima */
+  max-width: 450px; 
+  text-align: center;    /* per non allargarsi troppo */
+}
+
+/* ============================= */
+/*  PULSANTE CAMBIO VISTA        */
+/* ============================= */
+
+.go-to-graphics-container {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.go-to-graphics-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #e5b0c8; /* rosa elegante */
+  color: #3b2c2c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.go-to-graphics-btn:hover {
+  transform: translateY(-3px);
+  background: #d698b7;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+
+
+/* =============================== */
+/* YANKEE CANDLE — PORTFOLIO PAGE  */
+/* =============================== */
+
+.yankee-project-page {
+  background-color: #f3c9c9;   /* rosa elegante */
+  min-height: 100vh;
+  padding-top: 140px;          /* spazio sotto navbar */
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+.yankee-project-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.yankee-story-section {
+  max-width: 900px;
+  margin: 0 auto 60px auto;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  backdrop-filter: blur(3px);
+}
+
+.yankee-story-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  color: rgb(20, 20, 20);
+}
+
+.yankee-story-section p {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* FONT ELEGANTE PER LA SEZIONE STORIA */
+.yankee-story-section h2 {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.yankee-story-section p {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  font-style: italic;
+  color: #3d3d3d;
+}
+
+
+/* ========== GALLERIA PORTFOLIO YANKEE ========== */
+
+.yankee-gallery {
+  margin: 80px auto;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 0 40px;
+}
+
+.yankee-gallery img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.yankee-gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+}
+
+/* Responsive */
+@media (max-width: 780px) {
+  .yankee-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Rimuovere sfondo, ombra e bordi SOLO per la foto 4 */
+.yankee-gallery img.no-bg {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.yankee-gallery-title {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #3b2c2c;
+  text-align: center;
+  font-family: "Georgia", serif;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+
+/* ========================== */
+/* MODALE FOTO INGRANDITA     */
+/* ========================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+
+.modal-image {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+  animation: zoomIn 0.25s ease;
+  cursor: default;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.close-modal {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10000;
+}
+
+/* ============================= */
+/*      PAGINA GRAFICA YANKEE    */
+/* ============================= */
+
+.graphic-page {
+  background-color: #f3c9c9;
+  min-height: 100vh;
+  padding-top: 140px;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+/* --- Animazione di entrata --- */
+.graphic-page-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: graphicPageIn 0.8s ease forwards;
+}
+
+@keyframes graphicPageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade elegante sugli elementi */
+.graphic-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.7s ease;
+}
+
+.graphic-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* DELAY */
+.graphic-delay-1 { transition-delay: 0.1s; }
+.graphic-delay-2 { transition-delay: 0.3s; }
+.graphic-delay-3 { transition-delay: 0.5s; }
+.graphic-delay-4 { transition-delay: 0.7s; }
+
+/* --- STORIA --- */
+.graphic-story {
+  max-width: 900px;
+  margin: 0 auto 60px auto;
+  padding: 30px 20px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 14px;
+  backdrop-filter: blur(4px);
+}
+
+.graphic-story h2 {
+  font-size: 2.3rem;
+  font-family: Georgia, serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.graphic-story p {
+  font-size: 1.3rem;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+/* --- TITOLO GALLERIA --- */
+.graphic-gallery-title {
+  margin-bottom: 40px;
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+
+/* --- GALLERIA GRID --- */
+.graphic-gallery {
+  margin: 40px auto 0;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 0 40px;
+}
+
+.graphic-gallery img {
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.graphic-gallery img:hover {
+  transform: scale(1.03);
+}
+
+/* FOTO 4 SENZA SFONDO */
+.graphic-gallery .no-bg {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 780px) {
+  .graphic-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- MODALE --- */
+.graphic-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+}
+
+.graphic-modal-img {
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 10px;
+}
+
+.graphic-modal-close {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* --- RIPRISTINO TITOLO PRINCIPALE --- */
+.graphic-title {
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 40px;
+}
+
+
+/* ===================================== */
+/* HORIZON MEDIA — PAGINA CODICE         */
+/* ===================================== */
+
+.horizon-page {
+  background: #c8d7ff;
+  min-height: 100vh;
+  padding: 110px 0;
+  text-align: center;
+}
+
+/* TITOLI */
+.horizon-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  margin-bottom: 20px;
+}
+
+.horizon-section {
+  font-size: 2.3rem;
+  color: #1b1b1b;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+/* ===================================== */
+/* ANIMAZIONE SEZIONI (NOMI NUOVI)       */
+/* ===================================== */
+
+.hzfade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.hzshow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================== */
+/* SLIDER — CONTENITORE (NUOVO)          */
+/* ===================================== */
+
+.cardfx-container {
+  max-width: 1200px;
+  margin: 70px auto;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BOX FOTO */
+.cardfx-imgbox {
+  width: 480px;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* FOTO */
+.cardfx-img {
+  max-width: 420px;
+  max-height: 260px;
+  object-fit: contain;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+/* ENTRA */
+.cardfx-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ESCI */
+.cardfx-out {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+/* ===================================== */
+/* TESTO SLIDER (NUOVO)                  */
+/* ===================================== */
+
+.cardfx-text {
+  max-width: 450px;
+  text-align: left;
+}
+
+.cardfx-text h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.cardfx-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* BOTTONI */
+.cardfx-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.cardfx-buttons button {
+  background: #3c4ba7;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.cardfx-buttons button:hover {
+  background: #2d3b85;
+  transform: scale(1.03);
+}
+
+
+
+/* ===================================== */
+/* PULSANTE PASSA AL LATO GRAFICO (HORIZON MEDIA) */
+/* ===================================== */
+
+.hz-go-container {
+  margin-top: 60px;
+}
+
+.hz-go-btn {
+  display: inline-block;
+  background: #5871ff;   /* AZZURRO */
+  padding: 16px 28px;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.hz-go-btn:hover {
+  background: #4659d4;
+  transform: translateY(-2px);
+}
+
+/* ===================================== */
+/* MODALE                                */
+/* ===================================== */
+
+.img-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.70);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.img-modal-content {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+  border-radius: 10px;
+  animation: zoomIn 0.25s ease;
+}
+
+.close-modal {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  font-size: 2.4rem;
+  color: white;
+  cursor: pointer;
+  z-index: 100000;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===================================== */
+/* ENTRATA PAGINA                        */
+/* ===================================== */
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: pageIn 0.7s ease forwards;
+}
+
+@keyframes pageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================== */
+/* DIVISORE TRA LE DUE SEZIONI           */
+/* (identico a Yankee Candle)            */
+/* ===================================== */
+
+.hz-divider {
+  width: 85%;
+  height: 1px;
+  margin: 80px auto;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  border-radius: 2px;
+}
+
+/* ===================================== */
+/* SEZIONE CSS — SLIDER 2 (NUOVO)        */
+/* ===================================== */
+
+.cssfx-container {
+  max-width: 1200px;
+  margin: 70px;
+  display: flex;
+  gap: 70px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BOX IMMAGINE */
+.cssfx-imgbox {
+  width: 480px;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* FOTO */
+.cssfx-img {
+  max-width: 420px;
+  max-height: 260px;
+  object-fit: contain;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+/* ENTRA */
+.cssfx-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ESCI */
+.cssfx-out {
+  opacity: 0;
+  transform: translateX(-40px);
+}
+
+/* TESTO */
+.cssfx-text {
+  max-width: 450px;
+  text-align: left;
+}
+
+.cssfx-text h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.cssfx-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* BOTTONI */
+.cssfx-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.cssfx-buttons button {
+  background: #3c4ba7;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.cssfx-buttons button:hover {
+  background: #2d3b85;
+  transform: scale(1.03);
+}
+
+/* ===================================== */
+/* HORIZON MEDIA — PAGINA GRAFICA        */
+/* ===================================== */
+
+.hzg-page {
+  background: #c8d7ff;
+  min-height: 100vh;
+  padding: 120px 0 80px;
+  text-align: center;
+}
+
+/* TITOLONE */
+.hzg-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  margin-bottom: 40px;
+}
+
+/* ===================================== */
+/* STORIA                                */
+/* ===================================== */
+
+.hzg-story-box {
+  max-width: 900px;
+  margin: 0 auto 80px;
+  background: rgba(255,255,255,0.45);
+  padding: 40px 50px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font-family: "Georgia", serif;
+}
+
+.hzg-story-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1b1b1b;
+}
+
+.hzg-story-text {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #1b1b1b;
+}
+
+/* ===================================== */
+/* SOTTOTITOLO                           */
+/* ===================================== */
+
+.hzg-subtitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1b1b1b;
+  margin-bottom: 40px;
+}
+
+/* ===================================== */
+/* GALLERIA                              */
+/* ===================================== */
+
+.hzg-gallery {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 40px;
+  justify-items: center;
+}
+
+.hzg-img-wrapper {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.hzg-img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 18px;
+  transition: transform 0.3s ease;
+}
+
+.hzg-img:hover {
+  transform: scale(1.03);
+}
+
+
+
+/* ===================================== */
+/* PAGE ENTER ANIMATION                  */
+/* ===================================== */
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: pageIn 0.7s ease forwards;
+}
+
+@keyframes pageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================== */
+/* MODALE IMMAGINI — HORIZON MEDIA       */
+/* ===================================== */
+
+.hzg-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  animation: hzgFadeIn .25s ease forwards;
+}
+
+@keyframes hzgFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hzg-modal-img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 14px;
+  object-fit: contain;
+  animation: hzgZoomIn .25s ease;
+}
+
+@keyframes hzgZoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.hzg-modal-close {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  font-size: 2.4rem;
+  color: white;
+  cursor: pointer;
+  z-index: 1000000;
+}
+
+/* --- PULSANTE LIBRO PER YANKEE CANDLE --- */
+.yc-book-img {
+  width: 150px !important;    /* DIMENSIONE CORRETTA */
+  opacity: 0.9;
+  transition: transform .3s ease, opacity .3s ease;
+}
+
+/* Spazio sopra il pulsante libro SOLO per Yankee Candle */
+.yc-book-box {
+  margin-top: 120px;   /* lo puoi aumentare a 150/180 se vuoi ancora più aria */
+}
+
+
+.yc-book-img:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* Contenitore libro centratissimo */
+.yc-book-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* CENTRA orizzontalmente */
+  justify-content: center;
+  margin-top: 120px;     /* spazio sopra */
+  text-align: center;    /* centra il testo */
+}
+
+
+
+
+/* --- PULSANTE LIBRO PER HORIZON MEDIA --- */
+.hm-book-img {
+  width: 150px;         /* più grande */
+  opacity: 0.9;
+  transition: transform .3s ease, opacity .3s ease;
+  
+}
+
+.hm-book-img:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+
+/* --- POPUP MUSICA: BASE STYLE --- */
+
+.music-popup-overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35); /* sfondo scuro soft */
+  backdrop-filter: blur(4px);      /* effetto vetro sfocato */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.music-popup-box {
+  background: #ffffffdd; /* bianco con trasparenza */
+  padding: 30px 40px;
+  border-radius: 20px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  font-family: "Verdana", sans-serif;
+}
+
+.music-popup-buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-around;
+  gap: 15px;
+}
+
+.music-popup-buttons button {
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.music-popup-buttons button:hover {
+  transform: scale(1.05);
+  background: #ececec;
+}
+
+/* --- ANIMAZIONE LIFE IS STRANGE (FADE + SCALE) --- */
+
+.music-popup-box {
+  opacity: 0;
+  transform: scale(0.93);
+  animation: popupFadeIn 0.4s ease forwards;
+}
+
+@keyframes popupFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.93);
+    filter: blur(4px);
+  }
+  70% {
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* fade-in anche per l’overlay */
+.music-popup-overlay {
+  opacity: 0;
+  animation: overlayFade 0.4s ease forwards;
+}
+
+@keyframes overlayFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+/* ============================
+   CONTACT PAGE LAYOUT
+   ============================ */
+
+.contact-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Sinistra */
+.contact-left {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.contact-title {
+  font-size: 78px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.contact-subtitle {
+  margin-top: 10px;
+  color: #777;
+  font-size: 20px;
+  max-width: 400px;
+}
+
+/* Social links */
+.contact-socials {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-link {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #333;
+  transition: 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #0070f3;
+  transform: translateX(5px);
+}
+
+/* ⭐ Aggiunta per le icone vere */
+.contact-icon {
+  width: 42px;      /* grandezza identica a quelle del sito che mi hai mostrato */
+  height: 42px;
+  border-radius: 50%; /* rotonde e perfette */
+  object-fit: cover;
+  display: inline-block;
+}
+
+/* Destra */
+.contact-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 80px;   /* ⭐ Abbassa la foto di poco */
+}
+
+
+.contact-image {
+  width: 100%;
+  max-width: 700px;
+  object-fit: contain
+}
+
+.contact-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+
+/* ===== COVER SPECIFICA PER IL LIBRO REACT ===== */
+
+.react-cover {
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+.react-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.react-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* ============================= */
+/* LIFE IS STRANGE — PAGE STYLE */
+/* ============================= */
+
+.lis-page {
+  background: linear-gradient(
+    135deg,
+    #6a11cb 0%,
+    #b72ee6 25%,
+    #ff7ad1 50%,
+    #ff9f6e 75%,
+    #4facfe 100%
+  );
+  min-height: 100vh;
+  width: 100%;
+  padding-top: 120px;
+  text-align: center;
+
+  background-attachment: fixed;  /* effetto parallax leggero */
+  background-size: cover;
+}
+
+
+
+/* TITOLI LIFE IS STRANGE */
+.lis-title {
+  font-size: 3.4rem;
+  font-weight: 700;
+  color: white;                     /* ✔ bianco */
+  font-family: "Playfair Display", serif;  /* ✔ elegante corsivo/serif */
+  letter-spacing: 1px;
+}
+
+.lis-section {
+  margin-top: 25px;
+  font-size: 3rem;
+  font-weight: 600;
+  color: white;                     /* ✔ bianco */
+  font-family: "Playfair Display", serif;
+  opacity: 0.9;
+}
+
+
+
+
+/* ============================= */
+/*   LIFE IS STRANGE — SLIDER   */
+/* ============================= */
+
+.lis-slider-container {
+  max-width: 1200px;
+  margin: 50px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  padding: 40px;
+  width: 100%;
+}
+
+.lis-slider-image {
+  position: relative;
+  width: 480px;
+  height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.lis-slider-image img,
+.lis-slide-img-html,
+.lis-slide-img-css {
+  max-width: 420px;
+  max-height: 260px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 18px;
+}
+
+
+/* ========================== */
+/* SLIDER — IMMAGINI OVERLAY */
+/* ========================== */
+
+.lis-slide-img-html,
+.lis-slide-img-css {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  opacity: 0;
+  transform: translateX(40px) rotateY(10deg);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.lis-slide-img-html.slide-transition-in,
+.lis-slide-img-css.slide-transition-in {
+  opacity: 1 !important;
+  transform: translateX(0) rotateY(0) !important;
+}
+
+.lis-slide-img-html.slide-transition-out,
+.lis-slide-img-css.slide-transition-out {
+  opacity: 0 !important;
+  transform: translateX(-40px) rotateY(-10deg) !important;
+}
+
+
+/* ========================== */
+/* MODALE                     */
+/* ========================== */
+
+.lis-img-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.70);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 120px;
+  z-index: 99999;
+}
+
+.lis-img-modal-content {
+  max-width: 70%;
+  max-height: 70%;
+  border-radius: 10px;
+  object-fit: contain;
+  animation: zoomIn 0.25s ease;
+}
+
+.lis-close-modal {
+  position: fixed;
+  top: 90px;
+  right: 40px;
+  font-size: 2.4rem;
+  color: white;
+  cursor: pointer;
+  z-index: 100001;
+}
+
+
+/* ======================= */
+/* TRANSIZIONI SLIDE       */
+/* ======================= */
+
+.lis-slide-transition-in {
+  opacity: 1 !important;
+  transform: translateX(0) rotateY(0) !important;
+}
+
+.lis-slide-transition-out {
+  opacity: 0 !important;
+  transform: translateX(-40px) rotateY(-10deg) !important;
+}
+
+
+/* ======================== */
+/* SPACER / DIVISORI        */
+/* ======================== */
+
+.lis-divider {
+  width: 80%;
+  height: 1px;
+  margin: 60px auto;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
+
+/* ========================= */
+/* TEXT AREA SLIDER          */
+/* ========================= */
+
+.lis-slider-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* centra verticalmente */
+  align-items: flex-start;    /* testo allineato a sinistra */
+  max-width: 480px;
+}
+
+.lis-slider-text h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0a1a33;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.lis-slider-text p {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: #0a1a33;
+  max-width: 480px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+
+
+/* ============================= */
+/*  BOTTONI                      */
+/* ============================= */
+
+.lis-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.lis-buttons button {
+  background: white; 
+  color: black;
+  padding: 12px 22px;
+  border-radius: 10px;
+  border: 2px solid black;;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.lis-buttons button:hover {
+  background:#eaeaea;;
+  transform: scale(1.03);
+}
+
+
+/* ============================= */
+/*  PULSANTE LATO GRAFICO        */
+/* ============================= */
+
+.lis-go-to-graphics {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.lis-go-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: white;
+  color: #0a1a33;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.lis-go-btn:hover {
+  transform: translateY(-3px);
+  background: #6aa8ff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* ============================= */
+/* FIX: IMMAGINI NON ATTIVE      */
+/* ============================= */
+
+.lis-slide-hidden {
+  pointer-events: none;   /* non si può cliccare */
+  opacity: 0 !important;  /* invisibile */
+}
+
+
+/* ===================================== */
+/* LIFE IS STRANGE — PAGINA GRAFICA      */
+/* ===================================== */
+
+.lis-graphic-page {
+  min-height: 100vh;
+  padding: 120px 0 80px;
+  text-align: center;
+
+  background: linear-gradient(
+      135deg,
+      #ffb6c1 0%,
+      #ffd1e8 25%,
+      #c7d5ff 60%,
+      #a3c8ff 100%
+  );
+  background-attachment: fixed;
+}
+
+
+/* TITOLONE */
+.lis-graphic-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  margin-bottom: 40px;
+}
+
+/* ===================================== */
+/* GRAFICA (BOX COME HORIZON MEDIA)       */
+/* ===================================== */
+
+.lis-graphic-story {
+  max-width: 900px;
+  margin: 0 auto 80px;
+  background: rgba(255,255,255,0.45);
+  padding: 40px 50px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  font-family: "Georgia", serif;
+}
+
+.lis-graphic-story h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1b1b1b;
+}
+
+.lis-graphic-story p {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: #1b1b1b;
+}
+
+/* ===================================== */
+/* SOTTOTITOLO                           */
+/* ===================================== */
+
+.lis-graphic-gallery-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1b1b1b;
+  margin-bottom: 40px;
+}
+
+/* ===================================== */
+/* GALLERIA IMMAGINI                     */
+/* ===================================== */
+
+.lis-graphic-gallery {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 40px;
+  justify-items: center;
+}
+
+.lis-graphic-gallery img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 18px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.lis-graphic-gallery img:hover {
+  transform: scale(1.03);
+}
+
+/* ===================================== */
+/* TORNA AL LIBRO                        */
+/* ===================================== */
+
+.lis-book-box {
+  margin-top: 60px;
+}
+
+.lis-book-img {
+  width: 120px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.lis-book-img:hover {
+  transform: scale(1.05);
+}
+
+/* ===================================== */
+/* MODALE IMMAGINE                       */
+/* ===================================== */
+
+.lis-graphic-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.lis-graphic-modal-img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 15px;
+  animation: zoomIn 0.25s ease;
+}
+
+.lis-graphic-modal-close {
+  position: fixed;
+  top: 40px;
+  right: 50px;
+  font-size: 2.5rem;
+  color: white;
+  cursor: pointer;
+  z-index: 100000;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===================================== */
+/* ANIMAZIONE ENTRATA                    */
+/* ===================================== */
+
+.lis-graphic-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: lisPageIn 0.7s ease forwards;
+}
+
+@keyframes lisPageIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lis-graphic-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.7s ease;
+}
+
+.lis-graphic-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.lis-delay-1 { transition-delay: 0.2s; }
+.lis-delay-2 { transition-delay: 0.4s; }
+.lis-delay-3 { transition-delay: 0.6s; }
+.lis-delay-4 { transition-delay: 0.8s; }
+
+
+/* =============================== */
+/*   NOTE FINALI / POST-SCRIPTUM  */
+/* =============================== */
+
+.lis-ps-box {
+  max-width: 900px;
+  margin: 80px auto 40px;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 25px 35px;
+  border-radius: 18px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #0a1a33;
+  text-align: center;
+  font-family: "Georgia", serif;
+}
+
+/* CENTRARE IL LIBRICINO */
+.lis-book-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* ✔ centra orizzontalmente */
+  margin-top: 40px;
+}
+
+.lis-book-img {
+  width: 70px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.lis-book-img:hover {
+  transform: scale(1.1);
+}
+
+/* ============================= */
+/*  NOTA FINALE — CENTRATA       */
+/* ============================= */
+
+.lis-ps-box {
+  max-width: 700px;
+  margin: 60px auto;   /* ✔ CENTRATO */
+  background: rgba(255,255,255,0.45);
+  padding: 35px 45px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #1a1a1a;
+  text-align: center;  /* ✔ testo centrato */
+}
+
+/* ============================= */
+/*  LIBRICINO CENTRATO           */
+/* ============================= */
+
+.lis-book-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;   /* ✔ CENTRA L’ICONA */
+  margin-top: 40px;
+}
+
+.lis-book-img {
+  width: 150px;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.lis-book-img:hover {
+  transform: scale(1.12);
+}
+
+
+
+                     /* ============================= */
+                          /*  PARTE RESPONSIVE*/
+                    /* ============================= */
+
+/* ========================================================= */
+/* ===================== RESPONSIVE NAVBAR ================= */
+/* ========================================================= */
+
+/* HAMBURGER BASE */
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.navbar-hamburger span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+/* ===== MENU MOBILE (NASCOSTO DI DEFAULT) ===== */
+.navbar-mobile-menu {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: #000;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.navbar-mobile-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.navbar-mobile-menu a {
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* DROPDOWN VERSIONE MOBILE */
+.mobile-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mobile-dropdown span {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.mobile-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+.mobile-dropdown.show ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobile-dropdown ul li a {
+  color: white;
+  font-size: 16px;
+}
+
+/* ========================================================= */
+/* MEDIA QUERY — ATTIVA LA VERSIONE MOBILE */
+/* ========================================================= */
+
+@media (max-width: 900px) {
+
+  /* Nascondo menu desktop + social */
+  .navbar-links,
+  .navbar-social {
+    display: none;
+  }
+
+  /* Mostra hamburger */
+  .navbar-hamburger {
+    display: flex;
+  }
+}
+
+/* ========================================================= */
+/* === RESPONSIVE HOME ==================================== */
+/* ========================================================= */
+
+/* MOBILE E TABLET PICCOLI */
+@media (max-width: 768px) {
+
+  /* container diventa verticale */
+  .hero-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* ogni sezione prende width:100% e altezza fissa */
+  .hero-section {
+    width: 100%;
+    height: 50vh;
+    flex: none; /* disabilita l’effetto elastic */
+    transform: none !important; /* no zoom */
+  }
+
+  /* disabilita completamente l’hover */
+  .hero-container:hover .hero-section {
+    flex: none;
+  }
+  .hero-section:hover {
+    flex: none;
+    transform: none;
+  }
+  .hero-section:hover::before {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  /* testi più piccoli */
+  .hero-section h1 {
+    font-size: 1.8rem;
+    padding: 0 20px;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  /* evita che le immagini vengano zoomate o tagliate */
+  .hero-section.left,
+  .hero-section.right {
+    background-size: cover;
+    background-position: center top;
+  }
+}
+
+/* ========================================================= */
+/* === TABLET MEDIO (768–1024px) =========================== */
+/* ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+
+  /* l’hover rimane ma più soft */
+  .hero-container:hover .hero-section {
+    flex: 0.8;
+  }
+
+  .hero-section:hover {
+    flex: 1.2;
+  }
+}
+
+/* ========================================================= */
+/* ==================== RESPONSIVE MOBILE ================== */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+
+  /* ===== ABOUT ===== */
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 25px;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .about-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .about-text p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .about-photo .photo {
+    width: 85%;
+    max-width: 280px;
+  }
+
+  .about-divider {
+    margin: 40px 0;
+  }
+
+  /* ===== SKILLS / PIE CHART ===== */
+  .skills-chart-container {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .skills-column {
+    width: 100%;
+  }
+
+  .skills-column h2 {
+    font-size: 1.6rem;
+  }
+
+  .skills-column li {
+    font-size: 1rem;
+  }
+
+  .pie-chart {
+    width: 220px;
+    height: 220px;
+    transform: scale(0.95);
+    margin: 0 auto;
+  }
+
+  /* ===== RANDOM FACTS ===== */
+  .random-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .random-image img {
+    width: 70%;
+    max-width: 250px;
+  }
+
+  .random-text h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .random-text ul {
+    padding: 0;
+    width: 85%;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .random-text li {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* ===== MY STORY ===== */
+  .story-container {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .story-image img {
+    width: 80%;
+    max-width: 280px;
+  }
+
+  .story-text h2 {
+    font-size: 2rem;
+  }
+
+  .story-text p {
+    font-size: 1rem;
+    width: 90%;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top {
+    width: 55px;
+    height: 55px;
+    font-size: 26px;
+    margin: 60px auto 40px auto;
+  }
+}
+
+/* ========================================================= */
+/* ================== RESPONSIVE TABLET ===================== */
+/* ========================================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  .about-container {
+    padding: 60px 60px;
+    gap: 60px;
+  }
+
+  .skills-chart-container {
+    padding: 40px 60px;
+    gap: 40px;
+  }
+
+  .random-container {
+    padding: 60px 60px;
+    gap: 50px;
+  }
+
+  .story-container {
+    padding: 60px 60px;
+    gap: 50px;
+  }
+
+  .pie-chart {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* ============================
+   CONTACT PAGE LAYOUT
+   ============================ */
+
+.contact-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Sinistra */
+.contact-left {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.contact-title {
+  font-size: 78px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.contact-subtitle {
+  margin-top: 10px;
+  color: #777;
+  font-size: 20px;
+  max-width: 400px;
+}
+
+/* Social links */
+.contact-socials {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-link {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #333;
+  transition: 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #0070f3;
+  transform: translateX(5px);
+}
+
+/* Icone */
+.contact-icon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+/* Destra */
+.contact-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-image {
+  width: 100%;
+  max-width: 700px;
+  object-fit: contain;
+}
+
+
+/* ============================
+   ⭐ RESPONSIVE ⭐
+   ============================ */
+
+
+/* Tablet */
+@media (max-width: 992px) {
+  .contact-container {
+    padding: 60px 30px;
+    gap: 40px;
+  }
+
+  .contact-title {
+    font-size: 56px;
+  }
+
+  .contact-subtitle {
+    font-size: 18px;
+  }
+
+  .contact-image {
+    max-width: 500px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .contact-container {
+    flex-direction: column;      /* 🔥 Corretta qui: ora l’immagine appare */
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .contact-left {
+    padding-right: 0;
+  }
+
+  .contact-title {
+    font-size: 42px;
+  }
+
+  .contact-subtitle {
+    max-width: none;
+    font-size: 17px;
+  }
+
+  .contact-socials {
+    align-items: center;
+  }
+
+  .contact-image {
+    max-width: 350px;           /* ⭐ Perfetto per mobile */
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding-top: 120px; /* 🔥 Sposta tutto sotto la navbar */
+  }
+}
+
+/* ===================================== */
+/* 🔥 RESPONSIVE — HORIZON MEDIA CODICE  */
+/* ===================================== */
+
+/* TABLET (max 1024px) */
+@media (max-width: 1024px) {
+
+  .cardfx-container,
+  .cssfx-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    margin: 40px auto;
+  }
+
+  .cardfx-text,
+  .cssfx-text {
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .cardfx-imgbox,
+  .cssfx-imgbox {
+    width: 90%;
+    height: auto;
+  }
+
+  .cardfx-img,
+  .cssfx-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .horizon-title {
+    font-size: 2.5rem;
+  }
+
+  .horizon-section {
+    font-size: 1.9rem;
+  }
+}
+
+/* MOBILE GRANDE (max 768px) */
+@media (max-width: 768px) {
+
+  .horizon-page {
+    padding: 120px 10px;
+  }
+
+  .cardfx-container,
+  .cssfx-container {
+    gap: 30px;
+  }
+
+  .cardfx-text h2,
+  .cssfx-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .cardfx-text p,
+  .cssfx-text p {
+    font-size: 1rem;
+  }
+
+  .cardfx-buttons button,
+  .cssfx-buttons button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .hz-divider {
+    width: 90%;
+    margin: 50px auto;
+  }
+
+  .hz-go-container {
+    margin-top: 40px;
+  }
+
+  .hz-go-btn {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+  }
+}
+
+/* MOBILE PICCOLO (max 480px) */
+@media (max-width: 480px) {
+
+  .horizon-title {
+    font-size: 2rem;
+  }
+
+  .horizon-section {
+    font-size: 1.5rem;
+  }
+
+  .cardfx-imgbox,
+  .cssfx-imgbox {
+    width: 100%;
+  }
+
+  .cardfx-img,
+  .cssfx-img {
+    max-width: 100%;
+  }
+
+  .cardfx-text,
+  .cssfx-text {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .cardfx-buttons button,
+  .cssfx-buttons button {
+    width: 45%;
+  }
+
+  .hz-go-btn {
+    width: 85%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* MODALE SU MOBILE */
+  .img-modal-content {
+    max-width: 90%;
+    max-height: 60%;
+  }
+
+  .close-modal {
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+  }
+}
+
+/* ===================================== */
+/* 🔥 RESPONSIVE — HORIZON MEDIA GRAFICA  */
+/* ===================================== */
+
+/* ========================= */
+/*  MOBILE 480px             */
+/* ========================= */
+
+@media (max-width: 480px) {
+
+  .hzg-page {
+    padding: 160px 0 60px;  /* aggiungo aria sotto la navbar */
+  }
+
+  .hzg-title {
+    font-size: 1.9rem;
+    margin-bottom: 30px;
+    padding: 0 20px;
+  }
+
+  .hzg-story-box {
+    padding: 25px 25px;
+    margin: 0 15px 60px;
+  }
+
+  .hzg-story-text {
+    font-size: 1rem;
+  }
+
+  .hzg-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+  }
+
+  /* 🟣 GALLERIA MOBILE */
+  .hzg-gallery {
+    grid-template-columns: 1fr;   /* UNA FOTO per riga */
+    gap: 25px;
+    padding: 0 18px;
+  }
+
+  .hzg-img-wrapper {
+    max-width: 100%;
+    border-radius: 14px;
+  }
+
+  .hzg-img {
+    border-radius: 14px;
+  }
+
+  /* 📘 Libro */
+  .hm-book-img {
+    width: 120px;
+    margin-top: 20px;
+  }
+}
+
+/* ========================= */
+/*  TABLET 768px             */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .hzg-page {
+    padding: 150px 0 70px;
+  }
+
+  .hzg-title {
+    font-size: 2.3rem;
+    padding: 0 20px;
+  }
+
+  .hzg-story-box {
+    max-width: 90%;
+    padding: 35px 40px;
+  }
+
+  .hzg-subtitle {
+    font-size: 1.7rem;
+  }
+
+  /* 2 colonne ma più leggere */
+  .hzg-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+  }
+
+  .hm-book-img {
+    width: 140px;
+  }
+}
+
+/* ========================= */
+/*  LAPTOP piccoli           */
+/* ========================= */
+
+@media (max-width: 1100px) {
+  .hzg-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
+
+/* ============================= */
+/* 📱 RESPONSIVE YANKEE CANDLE CODICE  */
+/* ============================= */
+
+/* TABLET (max 1024px) */
+@media (max-width: 1024px) {
+
+  .slider-container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .slider-image {
+    width: 80%;
+    height: auto;
+  }
+
+  .slider-image img,
+  .slide-img-html,
+  .slide-img-css {
+    max-width: 100%;
+    max-height: 250px;
+  }
+
+  .slider-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .slider-text p {
+    font-size: 1.1rem;
+  }
+}
+
+
+/* MOBILE (max 768px) */
+@media (max-width: 768px) {
+
+  .yankee-page {
+    padding: 120px 10px;
+  }
+
+  .slider-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .slider-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .slider-image img,
+  .slide-img-html,
+  .slide-img-css {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .slider-text p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+}
+
+
+/* MOBILE PICCOLO (max 480px) */
+@media (max-width: 480px) {
+
+  .yankee-title {
+    font-size: 2rem;
+  }
+
+  .yankee-section {
+    font-size: 1.5rem;
+  }
+
+  .slider-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .slider-image img,
+  .slide-img-html,
+  .slide-img-css {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .slider-buttons button {
+    width: 45%;
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .img-modal-content {
+    max-width: 90%;
+    max-height: 60%;
+  }
+
+  .close-modal {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .slider-image {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 220px; /* OBBLIGA lo spazio alle immagini */
+  }
+
+  .slide-img-html,
+  .slide-img-css {
+    max-width: 100% !important;
+    max-height: 220px !important;
+  }
+}
+
+/* ============================= */
+/* 📌 TABLET — RIPRISTINO IMMAGINI */
+/* ============================= */
+@media (max-width: 1024px) {
+
+  .slider-container {
+    flex-direction: column !important;
+    gap: 40px !important;
+    padding: 20px !important;
+    text-align: center !important;
+  }
+
+  .slider-image {
+    width: 90% !important;
+    height: auto !important;
+    min-height: 260px !important; /* 🔥 obbliga lo spazio */
+  }
+
+  .slide-img-html,
+  .slide-img-css {
+    max-width: 100% !important;
+    max-height: 260px !important;
+  }
+
+  .slider-text {
+    max-width: 90% !important;
+    text-align: center !important;
+  }
+
+  .slider-text h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .slider-text p {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* ======================================================= */
+/*   📱📱  RESPONSIVE — LIFE IS STRANGE CODICE PAGE          */
+/*         
+/* ======================================================= */
+
+
+/* ========================= */
+/* TABLET (max 1024px)       */
+/* ========================= */
+
+@media (max-width: 1024px) {
+
+  .lis-slider-container {
+    flex-direction: column;
+    gap: 40px;
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  .lis-slider-text {
+    align-items: center;      /* testo centrato */
+    max-width: 90%;
+  }
+
+  .lis-slider-text h2,
+  .lis-slider-text p {
+    text-align: center;
+  }
+
+  .lis-slider-image {
+    width: 90%;
+    height: auto;
+  }
+
+  .lis-slider-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .lis-title {
+    font-size: 2.6rem;
+  }
+
+  .lis-section {
+    font-size: 2rem;
+  }
+}
+
+
+/* ========================= */
+/* MOBILE GRANDE (max 768px) */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .lis-page {
+    padding-top: 120px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .lis-slider-container {
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .lis-slider-text h2 {
+    font-size: 1.6rem;
+  }
+
+  .lis-slider-text p {
+    font-size: 1rem;
+  }
+
+  .lis-buttons button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .lis-divider {
+    width: 90%;
+    margin: 50px auto;
+  }
+
+  .lis-go-btn {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+  }
+}
+
+
+/* ========================= */
+/* MOBILE PICCOLO (max 480px)*/
+/* ========================= */
+
+@media (max-width: 480px) {
+
+  .lis-title {
+    font-size: 2rem;
+  }
+
+  .lis-section {
+    font-size: 1.5rem;
+  }
+
+  .lis-slider-image {
+    width: 100%;
+  }
+
+  .lis-slider-image img {
+    max-width: 100%;
+  }
+
+  .lis-slider-text {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .lis-buttons button {
+    width: 45%;
+  }
+
+  .lis-go-btn {
+    width: 85%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  /* MODALE SU MOBILE */
+  .lis-img-modal-content {
+    max-width: 90%;
+    max-height: 60%;
+  }
+
+  .lis-close-modal {
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+  }
+}
+
+/* FIX IMMAGINI NON ATTIVE — LIFE IS STRANGE */
+.lis-slide-img-html.lis-slide-hidden,
+.lis-slide-img-css.lis-slide-hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;   /* non possono coprire */
+  z-index: 0 !important;             /* vanno sotto */
+}
+
+/* IMMAGINE ATTIVA SEMPRE DAVANTI */
+.lis-slide-img-html.slide-transition-in,
+.lis-slide-img-css.slide-transition-in {
+  z-index: 5 !important;
+}
+
+.lis-slide-img-html.slide-transition-out,
+.lis-slide-img-css.slide-transition-out {
+  z-index: 1 !important;
+}
+
+.lis-slider-image {
+  min-height: 260px;   /* la tua misura esatta */
+}
+
+/* ===================================== */
+/* RESPONSIVE — LIFE IS STRANGE GRAFICA  */
+/* ===================================== */
+
+/* TABLET (max 1024px) */
+@media (max-width: 1024px) {
+
+  .lis-graphic-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    padding: 0 40px;              /* più spazio ai lati */
+    gap: 35px;
+  }
+
+  .lis-graphic-gallery img {
+    max-width: 420px;
+  }
+
+  .lis-graphic-story {
+    padding: 40px 35px;
+  }
+}
+
+/* MOBILE GRANDE (max 768px) */
+@media (max-width: 768px) {
+
+  .lis-graphic-title {
+    font-size: 2.2rem;
+  }
+
+  .lis-graphic-story {
+    padding: 30px 20px;
+    margin: 0 20px 60px;
+  }
+
+  .lis-graphic-gallery {
+    grid-template-columns: 1fr;   /* UNA COLONNA PERFETTA SU MOBILE */
+    padding: 0 25px;              /* margini più larghi e centrati */
+    gap: 30px;
+  }
+
+  .lis-graphic-gallery img {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+
+  .lis-ps-box {
+    margin: 50px 20px;
+    padding: 25px 20px;
+  }
+}
+
+/* MOBILE PICCOLO (max 480px) */
+@media (max-width: 480px) {
+
+  .lis-graphic-title {
+    font-size: 1.8rem;
+  }
+
+  .lis-graphic-story {
+    padding: 20px 15px;
+    margin: 0 15px 50px;
+  }
+
+  .lis-graphic-gallery {
+    padding: 0 15px;             /* ancora più centrato */
+    gap: 25px;
+  }
+
+  .lis-graphic-gallery img {
+    border-radius: 14px;
+  }
+
+  .lis-ps-box {
+    padding: 20px 15px;
+  }
+}
+
+
+
+
+
