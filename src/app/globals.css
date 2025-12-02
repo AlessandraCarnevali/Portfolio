@@ -3546,8 +3546,7 @@ body {
 }
 
 /* ======================================================= */
-/*   📱📱  RESPONSIVE — LIFE IS STRANGE CODICE PAGE          */
-/*         
+/*   📱📱 RESPONSIVE — LIFE IS STRANGE CODICE PAGE         */
 /* ======================================================= */
 
 
@@ -3565,7 +3564,7 @@ body {
   }
 
   .lis-slider-text {
-    align-items: center;      /* testo centrato */
+    align-items: center;
     max-width: 90%;
   }
 
@@ -3594,6 +3593,7 @@ body {
 }
 
 
+
 /* ========================= */
 /* MOBILE GRANDE (max 768px) */
 /* ========================= */
@@ -3604,6 +3604,9 @@ body {
     padding-top: 120px;
     padding-left: 10px;
     padding-right: 10px;
+
+    min-height: auto !important;       /* 🔥 niente buco bianco sotto */
+    padding-bottom: 40px !important;   /* margine finale pulito */
   }
 
   .lis-slider-container {
@@ -3619,35 +3622,38 @@ body {
     font-size: 1rem;
   }
 
+  /* 🔥 Fix pulsanti Previous / Next */
   .lis-buttons button {
-    padding: 10px 16px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    white-space: nowrap !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+
+    padding: 12px 22px;
+    min-width: 110px; 
     font-size: 14px;
   }
-
-  .lis-buttons button {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-
-  white-space: nowrap !important;   /* ❗ non va più a capo */
-  line-height: 1 !important;        /* ❗ altezza testo corretta */
-  vertical-align: middle;
-  
-  padding: 12px 22px;
-  min-width: 110px;                 /* ❗ evita spezzamento testo */
-}
-
 
   .lis-divider {
     width: 90%;
     margin: 50px auto;
   }
 
+  .lis-go-to-graphics {
+    margin-top: 25px !important;    /* 🔥 alzato in modo equilibrato */
+    margin-bottom: 20px !important;
+  }
+
   .lis-go-btn {
     font-size: 1.1rem;
     padding: 12px 20px;
+    transform: translateY(-5px);    /* 🔥 piccolo rialzo elegante */
   }
 }
+
 
 
 /* ========================= */
@@ -3681,10 +3687,16 @@ body {
     width: 45%;
   }
 
+  .lis-go-to-graphics {
+    margin-top: 20px !important;    /* 🔥 più vicino al contenuto */
+    margin-bottom: 20px !important;
+  }
+
   .lis-go-btn {
     width: 85%;
     display: block;
     margin: 0 auto;
+    transform: translateY(-8px);    /* 🔥 un po' più in su su mobile */
   }
 
   /* MODALE SU MOBILE */
@@ -3700,15 +3712,19 @@ body {
   }
 }
 
-/* FIX IMMAGINI NON ATTIVE — LIFE IS STRANGE */
+
+
+/* ================================================= */
+/* FIX IMMAGINI NON ATTIVE — LIFE IS STRANGE         */
+/* ================================================= */
+
 .lis-slide-img-html.lis-slide-hidden,
 .lis-slide-img-css.lis-slide-hidden {
   opacity: 0 !important;
-  pointer-events: none !important;   /* non possono coprire */
-  z-index: 0 !important;             /* vanno sotto */
+  pointer-events: none !important;
+  z-index: 0 !important;
 }
 
-/* IMMAGINE ATTIVA SEMPRE DAVANTI */
 .lis-slide-img-html.slide-transition-in,
 .lis-slide-img-css.slide-transition-in {
   z-index: 5 !important;
@@ -3720,14 +3736,7 @@ body {
 }
 
 .lis-slider-image {
-  min-height: 260px;   /* la tua misura esatta */
-}
-
-@media (max-width: 480px) {
-  .lis-go-to-graphics {
-    margin-top: 15px !important;     /* era 60 → poi 30 → ora 15 */
-    margin-bottom: 20px !important;  /* leggero, non troppo */
-  }
+  min-height: 260px;
 }
 
 
