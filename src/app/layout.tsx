@@ -35,8 +35,6 @@ export default function RootLayout({
         {/* NAVBAR QUI */}
         <Navbar />
 
-        {/* 🎵 AUDIO PLAYER GLOBALE */}
-        <audio id="global-audio-player" style={{ display: "none" }} />
 
        
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MusicPopup from "../components/MusicPopup";
  // 👉 IMPORT AGGIUNTO
 
 export default function Home() {
@@ -18,8 +17,7 @@ export default function Home() {
 
   return (
     <>
-      {/* 👉 POPUP ANCORA GREZZO, SOLO INSERITO */}
-      <MusicPopup />
+    
 
       <main className={`hero-container ${animate ? "animate" : ""}`}>
         <div
