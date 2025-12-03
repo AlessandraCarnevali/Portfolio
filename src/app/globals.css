@@ -3986,6 +3986,60 @@ body {
 }
 
 
+/* ===================================== */
+/* 🌙 DARK MODE — HORIZON MEDIA CODICE   */
+/* ===================================== */
+
+@media (prefers-color-scheme: dark) {
+
+  /* SFONDO PRINCIPALE */
+  .horizon-page {
+    background: #0f0f11 !important;   /* grigio/nero morbido */
+  }
+
+  /* TITOLI */
+  .horizon-title {
+    color: #ffffff !important;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.6) !important;
+  }
+
+  .horizon-section {
+    color: #e6e6e6 !important;
+  }
+
+  /* TESTI SLIDER 1 */
+  .cardfx-text h2,
+  .cardfx-text p {
+    color: #f0f0f0 !important;
+  }
+
+  /* TESTI SLIDER 2 */
+  .cssfx-text h2,
+  .cssfx-text p {
+    color: #f0f0f0 !important;
+  }
+
+  /* DIVISORI */
+  .hz-divider {
+    background: rgba(255,255,255,0.15) !important;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.15) !important;
+  }
+
+  /* BOTTONE "PASSA AL LATO GRAFICO" */
+  .hz-go-btn {
+    background: #4b63ff !important;
+    color: #fff !important;
+    box-shadow: 0 8px 20px rgba(255,255,255,0.1) !important;
+  }
+
+  .hz-go-btn:hover {
+    background: #384bce !important;
+  }
+
+  /* IMMAGINI: nessuna modifica necessaria */
+}
+
+
 
 
 
