@@ -4087,26 +4087,30 @@ body {
   }
 }
 
+/* ========================================= */
+/* YANKEE CANDLE — FIX TESTO SEZIONE STORIA */
+/* ========================================= */
 
-/* ============================================= */
-/* 🌙 DARK MODE — Yankee Candle (Lato Grafico)    */
-/* ============================================= */
+.graphic-story h2 {
+  color: #000 !important; /* titolo story in nero */
+}
 
+.graphic-story p {
+  color: #111 !important; /* testo story ben leggibile */
+}
+
+/* Modalità scura */
 @media (prefers-color-scheme: dark) {
-
-  /* Testo della sezione "Storia" più scuro */
-  .story-title,
-  .story-text {
-    color: #111 !important; /* nero morbido, leggibilissimo */
+  .graphic-story h2 {
+    color: #fff !important; /* titolo bianco in dark mode */
   }
 
-  /* Se hai un box dietro la storia (tipo sfondo bianco trasparente),
-     lo scuriamo leggermente così il testo risalta */
-  .story-box {
-    background: rgba(255, 255, 255, 0.75) !important;
-    backdrop-filter: blur(3px);
+  .graphic-story p {
+    color: #eaeaea !important; /* testo chiaro ma leggibile */
   }
 }
+
+
 
 
 
