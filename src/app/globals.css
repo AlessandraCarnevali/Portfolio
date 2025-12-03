@@ -4040,6 +4040,55 @@ body {
 }
 
 
+/* ============================================= */
+/* 🌙 DARK MODE — Yankee Candle (Codice Progetto) */
+/* ============================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  /* Sfondo generale scuro */
+  .yankee-page {
+    background-color: #0f0f0f !important;
+  }
+
+  /* Overlay non più rosa */
+  .yankee-container::before {
+    background: rgba(0,0,0,0.4) !important;
+    backdrop-filter: blur(2px);
+  }
+
+  /* Titoli */
+  .yankee-title,
+  .yankee-section {
+    color: #ffffff !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  }
+
+  /* Testo all'interno dello slider */
+  .slider-text h2,
+  .slider-text p {
+    color: #ffffff !important;
+  }
+
+  /* Divider */
+  .section-divider-yankee {
+    background: rgba(255,255,255,0.25) !important;
+    box-shadow: 0 4px 10px rgba(255,255,255,0.15) !important;
+  }
+
+  /* Bottone rosa → lo rendo visibile anche in dark */
+  .go-to-graphics-btn {
+    background: #ff8fcf !important;
+    color: #1a1a1a !important;
+  }
+
+  .go-to-graphics-btn:hover {
+    background: #ff79c2 !important;
+  }
+}
+
+
+
 
 
 
