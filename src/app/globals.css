@@ -3819,6 +3819,88 @@ body {
 }
 
 
+/* ===================================== */
+          /* DARK MODE */
+/* ===================================== */
+
+/* ========================================================= */
+/* ================= DARK MODE ABOUT SECTION ================ */
+/* ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  /* SFONDO GENERALE DELLA PAGINA */
+  body {
+    background-color: #121212 !important;
+  }
+
+  /* TESTI PRINCIPALI */
+  .about-text h1,
+  .random-text h2,
+  .story-text h2 {
+    color: #ffffff !important;
+  }
+
+  /* PARAGRAFI & LISTE */
+  .about-text p,
+  .random-text li,
+  .story-text p {
+    color: #cfcfcf !important;
+  }
+
+  /* DIVISORI */
+  .about-divider,
+  .section-divider {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  /* FOTO — nessuna modifica, si vedono bene */
+
+  /* PIE CHART */
+  .skills-chart-container {
+    background: #1c1c1c !important;
+  }
+
+  .skills-column h2 {
+    color: #f1f1f1 !important;
+  }
+
+  .skills-column li {
+    color: #d0d0d0 !important;
+  }
+
+  /* PIE CHART COLORS */
+  .pie-chart .designer {
+    background: linear-gradient(#4a4a4a, #3a3a3a) !important;
+  }
+
+  .pie-chart .coder {
+    background: #222 !important;
+  }
+
+  /* RANDOM FACTS */
+  .random-text {
+    color: #dddddd !important;
+  }
+
+  /* MY STORY */
+  .story-text {
+    color: #dcdcdc !important;
+  }
+
+  /* BACK TO TOP */
+  .back-to-top {
+    background: #1e1e1e !important;
+    color: #fff !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5) !important;
+  }
+
+  .back-to-top:hover {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.7) !important;
+  }
+}
+
 
 
 
