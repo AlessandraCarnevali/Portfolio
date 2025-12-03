@@ -4102,11 +4102,11 @@ body {
 /* Modalità scura */
 @media (prefers-color-scheme: dark) {
   .graphic-story h2 {
-    color: #fff !important; /* titolo bianco in dark mode */
+    color: #000 !important; /* titolo bianco in dark mode */
   }
 
   .graphic-story p {
-    color: #eaeaea !important; /* testo chiaro ma leggibile */
+     color: #111 !important;/* testo chiaro ma leggibile */
   }
 }
 
