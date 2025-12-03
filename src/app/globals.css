@@ -3970,32 +3970,15 @@ body {
   background-color: transparent !important;
 }
 
+
 @media (prefers-color-scheme: dark) {
   .cover {
-    background-image: url('/cover.jpg') !important;
-    -webkit-filter: none !important;
-    filter: none !important;
-    background-color: transparent !important;
+    background-image: url('/cover-dark.jpg') !important;
+    color: #fff !important;
   }
 }
 
-/* ========== PROTEZIONE COVER TESTO DALLA DARK MODE ========== */
-@media (prefers-color-scheme: dark) {
 
-  .cover {
-    forced-color-adjust: none !important;   /* Impedisce al browser di modificare colori/luminosità */
-    color-scheme: light !important;         /* Mantiene la cover come se fosse sempre light-mode */
-    filter: none !important;                /* Nessuna trasformazione */
-    background-image: url('/cover.jpg') !important;  /* Assicura che resti quella originale */
-  }
-
-  /* Se vuoi puoi rendere leggibile anche il testo sopra la cover */
-  .cover h1,
-  .cover h2,
-  .cover p {
-    color: #ffffff !important;
-  }
-}
 
 
 
