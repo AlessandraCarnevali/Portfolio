@@ -4088,6 +4088,28 @@ body {
 }
 
 
+/* ============================================= */
+/* 🌙 DARK MODE — Yankee Candle (Lato Grafico)    */
+/* ============================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  /* Testo della sezione "Storia" più scuro */
+  .story-title,
+  .story-text {
+    color: #111 !important; /* nero morbido, leggibilissimo */
+  }
+
+  /* Se hai un box dietro la storia (tipo sfondo bianco trasparente),
+     lo scuriamo leggermente così il testo risalta */
+  .story-box {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(3px);
+  }
+}
+
+
+
 
 
 
