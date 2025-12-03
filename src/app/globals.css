@@ -3954,6 +3954,32 @@ body {
   }
 }
 
+/* ========================================= */
+/* =========== COVER CODICEBACK — DARK MODE FIX ======= */
+/* ========================================= */
+
+.cover {
+  background-image: url('/cover.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* impedisce al browser di scurire o invertire la cover */
+  -webkit-filter: none !important;
+  filter: none !important;
+  background-color: transparent !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cover {
+    background-image: url('/cover.jpg') !important;
+    -webkit-filter: none !important;
+    filter: none !important;
+    background-color: transparent !important;
+  }
+}
+
+
 
 
 
