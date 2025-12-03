@@ -3899,6 +3899,62 @@ body {
   }
 }
 
+/* ========================================================= */
+/* ================= DARK MODE — CODICEBACK ================= */
+/* ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  /* Sfondo generale della pagina */
+  .codeback-container {
+    background-color: #0f0f0f !important;
+  }
+
+  /* Titolo principale */
+  .codeback-title {
+    color: #ffffff !important;
+  }
+
+  /* Testo "INDICE" */
+  .pagina-indice {
+    color: #d0d0d0 !important;
+  }
+
+  /* PAGINE DEL LIBRO */
+  .book-page {
+    background: #1a1a1a !important;          /* un grigio scuro elegante */
+    border: 1px solid #333 !important;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.5) !important;
+  }
+
+  /* Titoli dentro le pagine */
+  .book-page h1,
+  .book-page h2 {
+    color: #ffffff !important;               /* bianchi per leggibilità */
+  }
+
+  /* Paragrafi */
+  .book-page p {
+    color: #e0e0e0 !important;
+  }
+
+  /* Link — mantenuti blu ma più luminosi */
+  .book-page a {
+    color: #4d9dff !important;
+  }
+
+  .book-page a:hover {
+    color: #83b8ff !important;
+  }
+
+  /* COVER — testo pulito e leggibile */
+  .cover h1 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  }
+}
+
+
 
 
 
