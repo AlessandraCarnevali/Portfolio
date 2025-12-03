@@ -3955,28 +3955,36 @@ body {
 }
 
 /* ========================================= */
-/* ===COVER CODICEBACK — DARK MODE FIX ======= */
+/* === COVER CODICEBACK — LIGHT + DARK ===== */
 /* ========================================= */
 
+/* Stile base della cover */
 .cover {
-  background-image: url('/cover.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: contain !important;     /* Mostra tutta l'immagine verticale */
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 
-  /* impedisce al browser di scurire o invertire la cover */
   -webkit-filter: none !important;
   filter: none !important;
   background-color: transparent !important;
 }
 
+/* Modalità CHIARA */
+@media (prefers-color-scheme: light) {
+  .cover {
+    background-image: url('/cover.jpg') !important;
+    color: #0d2b40 !important; /* colore testo della cover originale */
+  }
+}
 
+/* Modalità SCURA */
 @media (prefers-color-scheme: dark) {
   .cover {
     background-image: url('/cover-dark.jpg') !important;
-    color: #fff !important;
+    color: #ffffff !important; /* scritte visibili in dark mode */
   }
 }
+
 
 
 
